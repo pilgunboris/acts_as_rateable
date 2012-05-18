@@ -9,7 +9,7 @@ module ActiveRecord
         def <<(rate)
           r = Rating.new
           r.rate = rate
-          r.rateable = proxy_owner
+          r.rateable = proxy_association.owner
           r.user_id = rate.user_id
           r.rater_name = rate.rater_name
           r.save
@@ -40,9 +40,7 @@ module ActiveRecord
         #
         # The passed in user object must respond to methods 'login' and 'id', otherwise an
         # exception is raised.
-        #
-        # todo refactor the 'id' & 'login' method names to the acts_as_rateable options hash and make it configurable
-        #
+        # TODO: refactor the 'id' & 'login' method names to the acts_as_rateable options hash and make it configurable
         def rate_it(score, user)
           return unless score
           rate = Rate.find_or_create_by_score(score.to_i)
