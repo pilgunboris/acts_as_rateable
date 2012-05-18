@@ -15,7 +15,7 @@ You can easily install gem by adding this line into your Gemfile:
 After you install Acts As Rateable and add it to your Gemfile, you need to run the generator:
 
 ```
-  rails generate acts_as_rateable`
+  rails generate acts_as_rateable
 ```
 
 The generator will add new migration, that's why the next is run migration:
