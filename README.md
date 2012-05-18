@@ -9,16 +9,20 @@ In this case, one user can rate an object once.
 You can easily install gem by adding this line into your Gemfile:
 
 ```ruby
-  gem "acts_as_rateable", :git => "git://github.com/anton-zaytsev/acts_as_rateable.git"
+  gem "acts_as_rateable", :git => "git://github.com/sadfuzzy/acts_as_rateable.git"
 ```
 
 After you install Acts As Rateable and add it to your Gemfile, you need to run the generator:
 
-  `rails generate acts_as_rateable`
+```
+  rails generate acts_as_rateable`
+```
 
 The generator will add new migration, that's why the next is run migration:
 
-  `rake db:migrate`
+```
+  rake db:migrate
+```
 
 ## Usage
 
