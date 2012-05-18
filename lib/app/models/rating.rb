@@ -5,7 +5,7 @@ class Rating < ActiveRecord::Base
   validates_uniqueness_of :user_id, :scope => [:rateable_id, :rateable_type]
 
   ##
-  # Parse the specified array of [TourProduct]s in the requested format.
+  # Parse the specified array of Posts in the requested format.
   #
   # === Parameters
   #
@@ -14,13 +14,13 @@ class Rating < ActiveRecord::Base
   #
   # @return the "ratings" in the requested structure, e.g. xml format string
   #
-  def self.parse_as(ratings, output = :xml)
-    if output == :xml
-      ratings.to_xml(:only => [:user_id, :rater_name, :created_at],
-                     :methods => [:score])
-    elsif output == :json
+  def self.parse_as(ratings, output = :json)
+    if output == :json
       ratings.to_json(:only => [:user_id, :rater_name, :created_at],
                       :methods => [:score])
+    elsif output == :xml
+      ratings.to_xml(:only => [:user_id, :rater_name, :created_at],
+                     :methods => [:score])
     end
   end
 
@@ -30,5 +30,4 @@ class Rating < ActiveRecord::Base
   def score
     rate.score
   end
-
 end
