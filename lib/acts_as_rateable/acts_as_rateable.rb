@@ -29,7 +29,9 @@ module ActiveRecord
       module SingletonMethods
         # Find all objects rated by score.
         def find_average_of(score)
-          find(:all, :include => [:rates]).collect { |i| i if i.average_rating.to_i == score }.compact
+          find(:all, :include => [:rates])
+          .collect { |i| i if i.average_rating.to_i == score }
+          .compact
         end
       end
 
@@ -59,7 +61,7 @@ module ActiveRecord
 
         # Rounds the average rating value.
         def average_rating_round
-          average_rating.round
+          average_rating.round(0)
         end
 
         # Returns the average rating in percent. The maximal score must be provided	or the default value (5) will be used.
