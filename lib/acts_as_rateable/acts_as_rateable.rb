@@ -76,8 +76,9 @@ module ActiveRecord
           ratings.detect { |r| r.user_id == user.id }
         end
 
-        def parse_ratings(output = :xml)
-          Rating.parse_as(ratings, output)
+        # Returns ratings with scores in json format
+        def jsoned_ratings
+          Rating.format(ratings)
         end
       end
 

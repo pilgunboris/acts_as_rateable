@@ -2,26 +2,20 @@ class Rating < ActiveRecord::Base
   belongs_to :rate
   belongs_to :rateable, :polymorphic => true
 
+  validates_presence_of :rate
   validates_uniqueness_of :user_id, :scope => [:rateable_id, :rateable_type]
 
   ##
-  # Parse the specified array of Posts in the requested format.
+  # Return the specified array of Ratings in json format.
   #
-  # === Parameters
+  # Result looks like:  [{ "created_at" : "2012-05-20T14:15:36+04:00",
+  #                        "rater_name" : "joan.toy",
+  #                        "user_id"    : 12,
+  #                        "score"      : 2 }, .. ]
   #
-  # [ratings] the array of Rating records
-  # [output] the requested output format, must be :xml or :json
-  #
-  # @return the "ratings" in the requested structure, e.g. xml format string
-  #
-  def self.parse_as(ratings, output = :json)
-    if output == :json
-      ratings.to_json(:only => [:user_id, :rater_name, :created_at],
-                      :methods => [:score])
-    elsif output == :xml
-      ratings.to_xml(:only => [:user_id, :rater_name, :created_at],
-                     :methods => [:score])
-    end
+  def self.format(ratings)
+    ratings.to_json(:only => [:user_id, :rater_name, :created_at],
+                    :methods => [:score])
   end
 
   ##
