@@ -15,7 +15,7 @@ class Rating < ActiveRecord::Base
   #                        "score"      : 2 }, .. ]
   #
   def self.format(ratings)
-    ratings.to_json(:only => [:user_id, :rater_name, :created_at],
+    ratings.to_json(:only => [:user_id, :free_text, :rater_name, :created_at],
                     :methods => [:score])
   end
 

@@ -3,13 +3,14 @@
 Acts_as_rateable is a plugin released under the MIT license.
 It makes activerecord models rateable through a polymorphic association and optionally logs which user rated which model.
 In this case, one user can rate an object once.
+Added possibility of adding free_text. Version for Rails 3.2.
 
 ## Installation
 
 You can easily install gem by adding this line into your Gemfile:
 
 ```ruby
-  gem "acts_as_rateable", :git => "git://github.com/sadfuzzy/acts_as_rateable.git", :branch => "master"
+  gem "acts_as_rateable", :git => "git://github.com/pilgunboris/acts_as_rateable.git", :branch => "master"
 ```
 
 After you install Acts As Rateable and add it to your Gemfile, you need to run the generator:

@@ -11,6 +11,7 @@ module ActiveRecord
           r.rate = rate
           r.rateable = proxy_association.owner
           r.user_id = rate.user_id
+          r.free_text = rate.free_text
           r.rater_name = rate.rater_name
           r.save
         end
@@ -43,12 +44,13 @@ module ActiveRecord
         # The passed in user object must respond to methods 'login' and 'id', otherwise an
         # exception is raised.
         # TODO: refactor the 'id' & 'login' method names to the acts_as_rateable options hash and make it configurable
-        def rate_it(score, user)
+        def rate_it(score, user, free_text = "" )
           return unless score
           rate = Rate.find_or_create_by_score(score.to_i)
           raise "User must respond to 'id' in order to set the user ID!" unless user.respond_to? :id
           raise "User must respond to 'nickname' in order to set rater name!" unless user.respond_to? :nickname
           rate.user_id = user.id
+          rate.free_text = free_text
           rate.rater_name = user.nickname
           rates << rate
         end
